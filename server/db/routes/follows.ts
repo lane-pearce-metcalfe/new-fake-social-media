@@ -19,4 +19,19 @@ router.get('/following/:id', async (req, res) => {
   }
 })
 
+router.get('/followers/:id', async (req, res) => {
+  const UserId = Number(req.params.id)
+
+  try {
+    const followers = await db.getUsersFollowers(UserId)
+
+    res.send(200).json(followers)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: `Something went wrong grabbing the accounts that follow user ${UserId}`,
+    })
+  }
+})
+
 export default router
