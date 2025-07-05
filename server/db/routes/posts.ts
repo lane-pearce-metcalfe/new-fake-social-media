@@ -19,4 +19,19 @@ router.get('/user/:id', async (req, res) => {
   }
 })
 
+router.get('/post/:id', async (req, res) => {
+  const PostId = Number(req.params.id)
+
+  try {
+    const post = await db.getPostById(PostId)
+
+    res.send(200).json(post)
+  } catch (error) {
+    console.log(error)
+    res
+      .status(500)
+      .json({ message: `Something went wrong grabbing post ${PostId}` })
+  }
+})
+
 export default router
