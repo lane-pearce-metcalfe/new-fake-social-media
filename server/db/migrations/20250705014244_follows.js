@@ -16,6 +16,7 @@ export async function up(knex) {
       .notNullable()
       .references('Id')
       .inTable('users')
+    table.string('FollowedAt')
   })
 }
 
