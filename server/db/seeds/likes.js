@@ -1,7 +1,7 @@
 export async function seed(knex) {
-  await knex('posts').del()
+  await knex('likes').del()
 
-  await knex('posts').insert([
+  await knex('likes').insert([
     {
       UserId: 2,
       PostId: 1,
