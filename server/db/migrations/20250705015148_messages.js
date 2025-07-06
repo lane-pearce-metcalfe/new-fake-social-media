@@ -18,6 +18,7 @@ export async function up(knex) {
       .references('Id')
       .inTable('conversations')
     table.string('MessageType')
+    table.text('Body')
     table.string('CreatedAt')
     table.string('EditedAt').nullable()
     table.boolean('IsDeleted')
