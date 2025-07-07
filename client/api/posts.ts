@@ -1,8 +1,8 @@
 import request from 'superagent'
 
-const rootUrl = '/api/v1/comments'
+const rootUrl = '/api/v1/posts'
 
-export async function getCommentsByPostId(postId: number) {
-  const result = await request.get(`${rootUrl}/post/${postId}`)
+export async function getPostsFromUser(userId: number) {
+  const result = await request.get(`${rootUrl}/user/${userId}`)
   return result.body
 }
