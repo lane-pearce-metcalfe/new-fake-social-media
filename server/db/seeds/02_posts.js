@@ -16,7 +16,7 @@ export async function seed(knex) {
       ImgUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_août_2014_%282%29.jpg/960px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_août_2014_%282%29.jpg',
       CreatedAt: 'Test date 2',
-      Loaction: 'Paris, France',
+      Location: 'Paris, France',
     },
     {
       Id: 3,
