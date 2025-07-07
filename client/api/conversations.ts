@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const rootUrl = '/api/v1/comments'
+const rootUrl = '/api/v1/conversations'
 
 export async function getAllCoversations() {
   const result = await request.get(`${rootUrl}/all`)
