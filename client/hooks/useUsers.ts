@@ -9,7 +9,7 @@ export function useGetUserById(userId: number) {
   return query
 }
 
-export function useGetUserByAuth0Sub(auth0Sub: string) {
+export function useGetUserByAuth0Sub(auth0Sub: string | undefined) {
   const query = useQuery({
     queryKey: ['auth0 sub: ', auth0Sub],
     queryFn: () => getUserByAuth0Sub(auth0Sub),

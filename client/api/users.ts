@@ -7,7 +7,7 @@ export async function getUserById(userId: number) {
   return result.body
 }
 
-export async function getUserByAuth0Sub(auth0Sub: string) {
+export async function getUserByAuth0Sub(auth0Sub: string | undefined) {
   const result = await request.get(`${rootUrl}/auth0/${auth0Sub}`)
   return result.body
 }
