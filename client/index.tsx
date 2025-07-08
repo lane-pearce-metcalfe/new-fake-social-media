@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
      * TODO: replace domain, clientId, and audience
      */
     <Auth0Provider
-      domain=""
-      clientId=""
+      domain="lane-piwakawaka-25.au.auth0.com"
+      clientId="44tKb0pFSHNN6P6d8hIsQWpxEONem2Xe"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: '',
+        audience: 'https://FakeSocialMedia/api',
       }}
     >
       <QueryClientProvider client={queryClient}>
