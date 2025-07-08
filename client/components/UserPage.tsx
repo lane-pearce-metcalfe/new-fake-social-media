@@ -9,6 +9,10 @@ export default function UserPage() {
 
   const { data: userProfileData } = useGetUserProfileInfo(Number(id))
 
+  if (!userData || !userProfileData) {
+    return <p>Loading...</p>
+  }
+
   return (
     <>
       <h1>{userData.UserName}</h1>
