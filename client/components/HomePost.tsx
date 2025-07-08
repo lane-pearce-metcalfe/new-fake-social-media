@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useGetUserById } from '../hooks/useUsers'
 
 export default function HomePost({ post }) {
@@ -8,9 +9,11 @@ export default function HomePost({ post }) {
   }
 
   return (
-    <div>
-      <p>{userData.UserName}</p>
-      <img src={post.ImgUrl} alt={post.Location} />
-    </div>
+    <Link to={`/post/${post.Id}`}>
+      <div>
+        <p>{userData.UserName}</p>
+        <img src={post.ImgUrl} alt={post.Location} />
+      </div>
+    </Link>
   )
 }
