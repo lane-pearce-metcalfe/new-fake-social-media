@@ -9,3 +9,8 @@ export async function getPostsFromUser(UserId: number) {
   const posts = await db('posts').where({ UserId }).select()
   return posts
 }
+
+export async function getAllPosts() {
+  const posts = await db('posts').select()
+  return posts
+}
