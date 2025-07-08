@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
   try {
     const likes = await db.getAmountOfLikes(PostId)
 
-    res.send(200).json(likes)
+    res.status(200).json(likes)
   } catch (error) {
     console.log(error)
     res.status(500).json({

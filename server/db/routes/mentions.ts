@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
   try {
     const mentions = await db.getMentionsOnPost(PostId)
 
-    res.send(200).json(mentions)
+    res.status(200).json(mentions)
   } catch (error) {
     console.log(error)
     res.status(500).json({

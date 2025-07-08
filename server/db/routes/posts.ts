@@ -9,8 +9,7 @@ router.get('/user/:id', async (req, res) => {
 
   try {
     const posts = await db.getPostsFromUser(UserId)
-
-    res.send(200).json(posts)
+    res.status(200).json(posts)
   } catch (error) {
     console.log(error)
     res
@@ -25,7 +24,7 @@ router.get('/post/:id', async (req, res) => {
   try {
     const post = await db.getPostById(PostId)
 
-    res.send(200).json(post)
+    res.status(200).json(post)
   } catch (error) {
     console.log(error)
     res

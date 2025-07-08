@@ -10,7 +10,7 @@ router.get('/theme/:id', async (req, res) => {
   try {
     const theme = await db.getUsersTheme(UserId)
 
-    res.send(200).json(theme)
+    res.status(200).json(theme)
   } catch (error) {
     console.log(error)
     res.status(500).json({

@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
   try {
     const reactions = await db.getMessageReactions(MessageId)
 
-    res.send(200).json(reactions)
+    res.status(200).json(reactions)
   } catch (error) {
     console.log(error)
     res.status(500).json({
