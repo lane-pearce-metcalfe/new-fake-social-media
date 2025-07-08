@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useGetPostById } from '../hooks/usePosts'
 import { useGetUserById } from '../hooks/useUsers'
+import { useGetCommentsOnPost } from '../hooks/useComments'
 
 export default function PostPage() {
   const { id } = useParams()
@@ -9,7 +10,9 @@ export default function PostPage() {
 
   const { data: postUserData } = useGetUserById(postData?.UserId)
 
-  if (!postData || !postUserData) {
+  const { data: commentsData } = useGetCommentsOnPost(Number(id))
+
+  if (!postData || !postUserData || !commentsData) {
     return <p>Loading...</p>
   }
 
@@ -27,6 +30,9 @@ export default function PostPage() {
         style={{ width: '30vw' }}
       />
       <p>{postData.CreatedAt}</p>
+      {commentsData.map((comment, i) => {
+        return <p key={`Comment ${i}`}>{comment.Comment}</p>
+      })}
     </>
   )
 }
