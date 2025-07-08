@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
   try {
     const messages = await db.getMessages(ConversationId)
 
-    res.send(200).json(messages)
+    res.status(200).json(messages)
   } catch (error) {
     console.log(error)
     res.status(500).json({

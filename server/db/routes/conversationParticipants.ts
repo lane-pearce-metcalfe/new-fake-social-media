@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
   try {
     const participants = await db.getConversationParticipants(ConversationId)
 
-    res.send(200).json(participants)
+    res.status(200).json(participants)
   } catch (error) {
     console.log(error)
     res.status(500).json({

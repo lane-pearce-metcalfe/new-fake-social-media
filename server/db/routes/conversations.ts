@@ -8,7 +8,7 @@ router.get('/all', async (req, res) => {
   try {
     const conversations = await db.getAllConversations()
 
-    res.send(200).json(conversations)
+    res.status(200).json(conversations)
   } catch (error) {
     console.log(error)
     res.status(500).json({

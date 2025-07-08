@@ -10,7 +10,7 @@ router.get('/id/:id', async (req, res) => {
   try {
     const user = await db.getUserById(UserId)
 
-    res.send(200).json(user)
+    res.json(user)
   } catch (error) {
     console.log(error)
     res.status(500).json({

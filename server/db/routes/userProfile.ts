@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
   try {
     const profileInfo = await db.getUsersProfileInfo(UserId)
 
-    res.send(200).json(profileInfo)
+    res.status(200).json(profileInfo)
   } catch (error) {
     console.log(error)
     res.status(500).json({

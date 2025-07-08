@@ -10,7 +10,7 @@ router.get('/post/:id', async (req, res) => {
   try {
     const comments = await db.getCommentsOnPost(PostId)
 
-    res.send(200).json(comments)
+    res.status(200).json(comments)
   } catch (error) {
     console.log(error)
     res.status(500).json({
