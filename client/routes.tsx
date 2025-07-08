@@ -2,9 +2,11 @@ import { createRoutesFromElements, Route } from 'react-router-dom'
 import PostPage from './components/PostPage.tsx'
 import Layout from './components/Layout.tsx'
 import UserPage from './components/UserPage.tsx'
+import HomeFeed from './components/HomeFeed.tsx'
 export default createRoutesFromElements(
   <>
     <Route path="/" element={<Layout />}>
+      <Route index element={<HomeFeed />} />
       <Route path="post/:id" element={<PostPage />} />
       <Route path="user/:id" element={<UserPage />} />
     </Route>
