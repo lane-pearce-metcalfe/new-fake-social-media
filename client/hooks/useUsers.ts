@@ -13,6 +13,7 @@ export function useGetUserByAuth0Sub(auth0Sub: string) {
   const query = useQuery({
     queryKey: ['auth0 sub: ', auth0Sub],
     queryFn: () => getUserByAuth0Sub(auth0Sub),
+    enabled: !!auth0Sub,
   })
   return query
 }
