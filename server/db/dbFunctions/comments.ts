@@ -1,4 +1,4 @@
-import { PostId } from '#models'
+import { Comment, PostId } from '#models'
 import db from '../connection.ts'
 
 export async function getCommentsOnPost(PostId: PostId) {
