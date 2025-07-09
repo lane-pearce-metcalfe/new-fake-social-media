@@ -4,6 +4,21 @@ import * as db from '../dbFunctions/users.ts'
 
 const router = Router()
 
+router.post('/', async (req, res) => {
+  const user = req.body
+
+  try {
+    await db.addUser(user)
+
+    res.status(200)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: `Something went wrong adding user`,
+    })
+  }
+})
+
 router.get('/id/:id', async (req, res) => {
   const UserId = Number(req.params.id)
 
