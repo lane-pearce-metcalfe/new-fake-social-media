@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { getUserByAuth0Sub, getUserById } from '../api/users'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { addUser, getUserByAuth0Sub, getUserById } from '../api/users'
 
 export function useGetUserById(userId: number) {
   const query = useQuery({
@@ -16,4 +16,18 @@ export function useGetUserByAuth0Sub(auth0Sub: string | undefined) {
     enabled: !!auth0Sub,
   })
   return query
+}
+
+export function useAddUser() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (user) => {
+      addUser(user)
+    },
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['auth0 sub: ', variables.auth0Sub],
+      })
+    },
+  })
 }
