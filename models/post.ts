@@ -1,5 +1,7 @@
 import { UserId } from './user'
 
+export type PostId = number
+
 export interface AddPost {
   UserId: UserId
   ImgUrl: string
@@ -8,5 +10,5 @@ export interface AddPost {
 }
 
 export interface Post extends AddPost {
-  Id: number
+  Id: PostId
 }
