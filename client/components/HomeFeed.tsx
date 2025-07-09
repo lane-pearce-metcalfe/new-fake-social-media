@@ -9,7 +9,11 @@ export default function HomeFeed() {
     return <p>Loading...</p>
   }
 
-  return postsData.map((post: Post) => {
-    return <HomePost post={post} key={`Post ${post.Id}`} />
-  })
+  return (
+    <div className="homeFeed">
+      {postsData.map((post: Post) => {
+        return <HomePost post={post} key={`Post ${post.Id}`} />
+      })}
+    </div>
+  )
 }
