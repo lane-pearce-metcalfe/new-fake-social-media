@@ -1,6 +1,7 @@
 import { Post } from '#models'
 import { useGetAllPosts } from '../hooks/usePosts'
 import HomePost from './HomePost'
+import '../styles/homeFeed.css'
 
 export default function HomeFeed() {
   const { data: postsData } = useGetAllPosts()

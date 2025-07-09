@@ -1,0 +1,22 @@
+.homeFeed {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80vw;
+  margin-top: 2vh;
+}
+
+@media (min-width: 768px) {
+  .homeFeed {
+    width: 70vw;
+    margin-top: 3vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homeFeed {
+    width: 50vw;
+    margin-top: 5vh;
+  }
+}
