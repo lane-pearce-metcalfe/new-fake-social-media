@@ -34,7 +34,7 @@ router.get('/id/:id', async (req, res) => {
   }
 })
 
-router.get('auth0/:sub', async (req, res) => {
+router.get('/auth0/:sub', async (req, res) => {
   const Auth0Sub = String(req.params.sub)
 
   try {

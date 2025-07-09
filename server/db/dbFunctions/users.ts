@@ -11,5 +11,5 @@ export async function getUserByAuth0Sub(Auth0Sub: string) {
 }
 
 export async function addUser(user) {
-  await db('users').insert({ user })
+  await db('users').insert(user)
 }
