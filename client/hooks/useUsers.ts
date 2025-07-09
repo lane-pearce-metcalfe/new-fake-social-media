@@ -21,12 +21,19 @@ export function useGetUserByAuth0Sub(auth0Sub: string | undefined) {
 export function useAddUser() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (user) => {
+    mutationFn: async (user: {
+      UserName: string
+      FullName: string
+      Email: string
+      PfpUrl: string
+      UserSince: string
+      Auth0Sub: string
+    }) => {
       addUser(user)
     },
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ['auth0 sub: ', variables.auth0Sub],
+        queryKey: ['auth0 sub: ', variables.Auth0Sub],
       })
     },
   })
