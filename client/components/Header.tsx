@@ -6,7 +6,9 @@ export default function Header() {
   console.log(user)
 
   function handleLogin() {
-    loginWithRedirect()
+    loginWithRedirect({
+      appState: { returnTo: '/loadUser' },
+    })
   }
 
   function handleLogout() {
