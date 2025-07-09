@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useGetPostById } from '../hooks/usePosts'
 import { useGetUserById } from '../hooks/useUsers'
 import { useGetCommentsOnPost } from '../hooks/useComments'
+import { Comment } from '#models'
 
 export default function PostPage() {
   const { id } = useParams()
@@ -30,7 +31,7 @@ export default function PostPage() {
         style={{ width: '30vw' }}
       />
       <p>{postData.CreatedAt}</p>
-      {commentsData.map((comment, i) => {
+      {commentsData.map((comment: Comment, i) => {
         return <p key={`Comment ${i}`}>{comment.Comment}</p>
       })}
     </>

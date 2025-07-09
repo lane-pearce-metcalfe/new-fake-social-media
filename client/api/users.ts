@@ -3,7 +3,7 @@ import request from 'superagent'
 
 const rootUrl = '/api/v1/users'
 
-export async function getUserById(userId: UserId) {
+export async function getUserById(userId: UserId | undefined) {
   const result = await request.get(`${rootUrl}/id/${userId}`)
   return result.body
 }

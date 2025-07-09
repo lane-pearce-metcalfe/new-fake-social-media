@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import * as db from '../dbFunctions/comments.ts'
+import { Comment } from '#models'
 
 const router = Router()
 
@@ -8,7 +9,7 @@ router.get('/post/:id', async (req, res) => {
   const PostId = Number(req.params.id)
 
   try {
-    const comments = await db.getCommentsOnPost(PostId)
+    const comments: Comment[] = await db.getCommentsOnPost(PostId)
 
     res.status(200).json(comments)
   } catch (error) {

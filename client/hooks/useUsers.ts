@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { addUser, getUserByAuth0Sub, getUserById } from '../api/users'
 import { AddUser, Auth0Sub, UserId } from '#models'
 
-export function useGetUserById(userId: UserId) {
+export function useGetUserById(userId: UserId | undefined) {
   const query = useQuery({
     queryKey: ['user: ', userId],
     queryFn: () => getUserById(userId),
