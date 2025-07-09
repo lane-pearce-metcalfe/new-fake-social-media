@@ -3,6 +3,7 @@ import PostPage from './components/PostPage.tsx'
 import Layout from './components/Layout.tsx'
 import UserPage from './components/UserPage.tsx'
 import HomeFeed from './components/HomeFeed.tsx'
+import LoadingUser from './components/LoadingUser.tsx'
 export default createRoutesFromElements(
   <>
     <Route path="/" element={<Layout />}>
@@ -10,5 +11,6 @@ export default createRoutesFromElements(
       <Route path="post/:id" element={<PostPage />} />
       <Route path="user/:id" element={<UserPage />} />
     </Route>
+    <Route path="/loadUser" element={<LoadingUser />} />
   </>,
 )
