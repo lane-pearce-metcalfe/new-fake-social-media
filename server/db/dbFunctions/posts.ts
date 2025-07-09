@@ -1,16 +1,17 @@
+import { Post, PostId, UserId } from '#models'
 import db from '../connection.ts'
 
-export async function getPostById(Id: number) {
+export async function getPostById(Id: PostId) {
   const post = await db('posts').where({ Id }).first()
-  return post
+  return post as Post
 }
 
-export async function getPostsFromUser(UserId: number) {
+export async function getPostsFromUser(UserId: UserId) {
   const posts = await db('posts').where({ UserId }).select()
-  return posts
+  return posts as Post[]
 }
 
 export async function getAllPosts() {
   const posts = await db('posts').select()
-  return posts
+  return posts as Post[]
 }

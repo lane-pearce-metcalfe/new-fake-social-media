@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useGetUserById } from '../hooks/useUsers'
+import { Post } from '#models'
 
-export default function HomePost({ post }) {
+interface Props {
+  post: Post
+}
+
+export default function HomePost({ post }: Props) {
   const { data: userData } = useGetUserById(Number(post.UserId))
 
   if (!userData) {

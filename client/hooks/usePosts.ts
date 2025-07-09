@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { getAllPosts, getPostById, getPostsFromUser } from '../api/posts'
+import { PostId, UserId } from '#models'
 
-export function useGetPostsFromUser(userId: number) {
+export function useGetPostsFromUser(userId: UserId) {
   const query = useQuery({
     queryKey: ['posts from user: ', userId],
     queryFn: () => getPostsFromUser(userId),
@@ -9,7 +10,7 @@ export function useGetPostsFromUser(userId: number) {
   return query
 }
 
-export function useGetPostById(postId: number) {
+export function useGetPostById(postId: PostId) {
   const query = useQuery({
     queryKey: ['post: ', postId],
     queryFn: () => getPostById(postId),

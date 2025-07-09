@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { addUser, getUserByAuth0Sub, getUserById } from '../api/users'
+import { AddUser, Auth0Sub, UserId } from '#models'
 
-export function useGetUserById(userId: number) {
+export function useGetUserById(userId: UserId | undefined) {
   const query = useQuery({
     queryKey: ['user: ', userId],
     queryFn: () => getUserById(userId),
@@ -9,7 +10,7 @@ export function useGetUserById(userId: number) {
   return query
 }
 
-export function useGetUserByAuth0Sub(auth0Sub: string | undefined) {
+export function useGetUserByAuth0Sub(auth0Sub: Auth0Sub | undefined) {
   const query = useQuery({
     queryKey: ['auth0 sub: ', auth0Sub],
     queryFn: () => getUserByAuth0Sub(auth0Sub),
@@ -21,14 +22,7 @@ export function useGetUserByAuth0Sub(auth0Sub: string | undefined) {
 export function useAddUser() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (user: {
-      UserName: string
-      FullName: string
-      Email: string
-      PfpUrl: string
-      UserSince: string
-      Auth0Sub: string
-    }) => {
+    mutationFn: async (user: AddUser) => {
       addUser(user)
     },
     onSuccess: (data, variables) => {

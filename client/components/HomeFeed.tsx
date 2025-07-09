@@ -1,3 +1,4 @@
+import { Post } from '#models'
 import { useGetAllPosts } from '../hooks/usePosts'
 import HomePost from './HomePost'
 
@@ -8,7 +9,7 @@ export default function HomeFeed() {
     return <p>Loading...</p>
   }
 
-  return postsData.map((post) => {
+  return postsData.map((post: Post) => {
     return <HomePost post={post} key={`Post ${post.Id}`} />
   })
 }

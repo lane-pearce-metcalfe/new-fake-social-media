@@ -1,11 +1,12 @@
 import { Router } from 'express'
 
 import * as db from '../dbFunctions/users.ts'
+import { AddUser, User } from '#models'
 
 const router = Router()
 
 router.post('/', async (req, res) => {
-  const user = req.body
+  const user: AddUser = req.body
 
   try {
     await db.addUser(user)
@@ -23,7 +24,7 @@ router.get('/id/:id', async (req, res) => {
   const UserId = Number(req.params.id)
 
   try {
-    const user = await db.getUserById(UserId)
+    const user: User = await db.getUserById(UserId)
 
     res.json(user)
   } catch (error) {
@@ -38,7 +39,7 @@ router.get('/auth0/:sub', async (req, res) => {
   const Auth0Sub = String(req.params.sub)
 
   try {
-    const user = await db.getUserByAuth0Sub(Auth0Sub)
+    const user: User = await db.getUserByAuth0Sub(Auth0Sub)
 
     res.json(user)
   } catch (error) {
