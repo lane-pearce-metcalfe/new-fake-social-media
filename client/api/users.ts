@@ -11,3 +11,7 @@ export async function getUserByAuth0Sub(auth0Sub: string | undefined) {
   const result = await request.get(`${rootUrl}/auth0/${auth0Sub}`)
   return result.body
 }
+
+export async function addUser(user) {
+  await request.post(`${rootUrl}`).send(user)
+}
