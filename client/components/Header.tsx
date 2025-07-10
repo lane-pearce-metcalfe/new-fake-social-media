@@ -1,4 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
+import '../styles/header.css'
 
 export default function Header() {
   const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0()
@@ -22,10 +23,14 @@ export default function Header() {
         {!isAuthenticated ? (
           <button onClick={handleLogin}>Sign in</button>
         ) : (
-          <>
+          <div className="headerUserInfo">
             <button onClick={handleLogout}>Log Out</button>
-            <img src={user?.picture} alt={user?.nickname} />
-          </>
+            <img
+              src={user?.picture}
+              alt={user?.nickname}
+              className="headerPfp"
+            />
+          </div>
         )}
       </div>
     </header>
