@@ -16,7 +16,15 @@ export default function HomePost({ post }: Props) {
 
   return (
     <div className="postContainer">
-      <p>{userData.UserName}</p>
+      <div className="postUserInfo">
+        <img src={userData.PfpUrl} alt={userData.UserName} />
+        <div className="postUserNameContainer">
+          <p className="postUserName">{userData.UserName}</p>
+          {!post.Location ? null : (
+            <p className="postLocation">{post.Location}</p>
+          )}
+        </div>
+      </div>
       <Link to={`/post/${post.Id}`}>
         <img src={post.ImgUrl} alt={post.Location} className="postImg" />
       </Link>
