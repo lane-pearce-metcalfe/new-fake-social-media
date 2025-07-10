@@ -7,6 +7,7 @@ export interface AddPost {
   ImgUrl: string
   CreatedAt: string
   Location: string
+  Description: string
 }
 
 export interface Post extends AddPost {
