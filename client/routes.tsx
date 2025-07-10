@@ -4,12 +4,14 @@ import Layout from './components/Layout.tsx'
 import UserPage from './components/UserPage.tsx'
 import HomeFeed from './components/HomeFeed.tsx'
 import LoadingUser from './components/LoadingUser.tsx'
+import ImageUploadComponent from './components/UploadPost.tsx'
 export default createRoutesFromElements(
   <>
     <Route path="/" element={<Layout />}>
       <Route index element={<HomeFeed />} />
       <Route path="post/:id" element={<PostPage />} />
       <Route path="user/:id" element={<UserPage />} />
+      <Route path="/upload" element={<ImageUploadComponent />} />
     </Route>
     <Route path="/loadUser" element={<LoadingUser />} />
   </>,
