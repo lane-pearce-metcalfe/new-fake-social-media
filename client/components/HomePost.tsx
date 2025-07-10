@@ -14,6 +14,8 @@ export default function HomePost({ post }: Props) {
     return <p>Loading...</p>
   }
 
+  console.log(post)
+
   return (
     <div className="postContainer">
       <div className="postUserInfo">
@@ -28,6 +30,7 @@ export default function HomePost({ post }: Props) {
       <Link to={`/post/${post.Id}`}>
         <img src={post.ImgUrl} alt={post.Location} className="postImg" />
       </Link>
+      <p>{post.Description}</p>
     </div>
   )
 }
