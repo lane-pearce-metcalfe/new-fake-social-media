@@ -12,6 +12,7 @@ export async function up(knex) {
       .references('Id')
       .inTable('users')
     table.string('ImgUrl')
+    table.text('Description')
     table.string('CreatedAt')
     table.string('Location')
   })
