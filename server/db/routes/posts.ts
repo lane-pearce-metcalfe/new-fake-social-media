@@ -1,9 +1,22 @@
 import { Router } from 'express'
 
 import * as db from '../dbFunctions/posts.ts'
-import { Post } from '#models'
+import { AddPost, Post } from '#models'
 
 const router = Router()
+
+router.post('/upload', async (req, res) => {
+  const post: AddPost = req.body
+
+  try {
+    const postId = await db.addPost(post)
+
+    res.status(200).json(postId)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: `Something went wrong uploading a post` })
+  }
+})
 
 router.get('/user/:id', async (req, res) => {
   const UserId = Number(req.params.id)

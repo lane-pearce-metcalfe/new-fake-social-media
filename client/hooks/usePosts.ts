@@ -1,6 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllPosts, getPostById, getPostsFromUser } from '../api/posts'
-import { PostId, UserId } from '#models'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  addPost,
+  getAllPosts,
+  getPostById,
+  getPostsFromUser,
+} from '../api/posts'
+import { AddPost, PostId, UserId } from '#models'
 
 export function useGetPostsFromUser(userId: UserId) {
   const query = useQuery({
@@ -24,4 +29,18 @@ export function useGetAllPosts() {
     queryFn: () => getAllPosts(),
   })
   return query
+}
+
+export function useAddPost() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: async (post: AddPost) => {
+      addPost(post)
+    },
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['posts from user: ', variables.UserId],
+      })
+    },
+  })
 }
