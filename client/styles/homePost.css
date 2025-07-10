@@ -1,0 +1,33 @@
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.postImg {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.postContainer p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .postContainer {
+    max-width: 50vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .postContainer {
+    max-width: 30vw;
+  }
+}
