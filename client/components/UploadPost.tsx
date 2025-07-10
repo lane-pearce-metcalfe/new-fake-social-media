@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Upload, X, Check, AlertCircle } from 'lucide-react'
+import { Upload, X } from 'lucide-react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useGetUserByAuth0Sub } from '../hooks/useUsers'
 import { useAddPost } from '../hooks/usePosts'
@@ -18,14 +18,14 @@ export default function ImageUploadComponent() {
   const [file, setFile] = useState(null)
   const [preview, setPreview] = useState(null)
   const [uploading, setUploading] = useState(false)
-  const [uploadStatus, setUploadStatus] = useState(null)
   const [imageUrl, setImageUrl] = useState('')
+  const [description, setDescription] = useState('')
+  const [location, setLoaction] = useState('')
 
   const handleFileSelect = (e) => {
     const selectedFile = e.target.files[0]
     if (selectedFile) {
       setFile(selectedFile)
-      setUploadStatus(null)
 
       const reader = new FileReader()
       reader.onload = (e) => setPreview(e.target.result)
@@ -38,7 +38,6 @@ export default function ImageUploadComponent() {
     const droppedFile = e.dataTransfer.files[0]
     if (droppedFile && droppedFile.type.startsWith('image/')) {
       setFile(droppedFile)
-      setUploadStatus(null)
 
       const reader = new FileReader()
       reader.onload = (e) => setPreview(e.target.result)
@@ -46,7 +45,7 @@ export default function ImageUploadComponent() {
     }
   }
 
-  const handleDragOver = (e) => {
+  const handleDragOver = (e: { preventDefault: () => void }) => {
     e.preventDefault()
   }
 
@@ -54,7 +53,6 @@ export default function ImageUploadComponent() {
     if (!file || !userData) return
 
     setUploading(true)
-    setUploadStatus(null)
 
     try {
       const formData = new FormData()
@@ -79,7 +77,8 @@ export default function ImageUploadComponent() {
         {
           UserId: Number(userData.Id),
           ImgUrl: uploadedImageurl,
-          Location: 'I dont know',
+          Location: location,
+          Description: description,
           CreatedAt: String(now.toDateString()),
         },
         {
@@ -98,7 +97,6 @@ export default function ImageUploadComponent() {
   const handleClear = () => {
     setFile(null)
     setPreview(null)
-    setUploadStatus(null)
     setImageUrl('')
   }
 
@@ -127,7 +125,6 @@ export default function ImageUploadComponent() {
               alt="Preview"
               className="mx-auto h-40 max-w-full rounded-lg object-cover"
             />
-            <p className="text-sm text-gray-600">{file.name}</p>
             <button
               onClick={handleClear}
               className="mx-auto flex items-center gap-1 text-red-500 hover:text-red-700"
@@ -173,25 +170,6 @@ export default function ImageUploadComponent() {
           )}
         </button>
       )}
-
-      {/* Status Messages */}
-      {uploadStatus && (
-        <div
-          className={`mt-4 flex items-center gap-2 rounded-lg p-3 ${
-            uploadStatus.type === 'success'
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'
-          }`}
-        >
-          {uploadStatus.type === 'success' ? (
-            <Check size={16} />
-          ) : (
-            <AlertCircle size={16} />
-          )}
-          <span className="text-sm">{uploadStatus.message}</span>
-        </div>
-      )}
-
       {imageUrl && (
         <div className="mt-4 rounded-lg bg-gray-100 p-3">
           <p className="mb-2 text-sm font-medium text-gray-700">
@@ -200,6 +178,34 @@ export default function ImageUploadComponent() {
           <p className="break-all text-xs text-gray-600">{imageUrl}</p>
         </div>
       )}
+      <h1>Add a description</h1>
+      <input
+        type="text"
+        onChange={(e) => {
+          e.preventDefault()
+          setDescription(e.target.value)
+        }}
+        style={{
+          boxShadow: '4px 4px 7px rgba(0, 0, 0, 0.2)',
+          margin: '10px 0px',
+          borderRadius: '10px',
+          width: '100%',
+        }}
+      />
+      <h1>Add a Location</h1>
+      <input
+        type="text"
+        onChange={(e) => {
+          e.preventDefault()
+          setLoaction(e.target.value)
+        }}
+        style={{
+          boxShadow: '4px 4px 7px rgba(0, 0, 0, 0.2)',
+          margin: '10px 0px',
+          borderRadius: '10px',
+          width: '100%',
+        }}
+      />
     </div>
   )
 }
