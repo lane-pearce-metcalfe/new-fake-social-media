@@ -1,5 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import '../styles/header.css'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0()
@@ -24,6 +25,9 @@ export default function Header() {
           <button onClick={handleLogin}>Sign in</button>
         ) : (
           <div className="headerUserInfo">
+            <Link to="/upload" className="addPost">
+              +
+            </Link>
             <button onClick={handleLogout}>Log Out</button>
             <img
               src={user?.picture}
