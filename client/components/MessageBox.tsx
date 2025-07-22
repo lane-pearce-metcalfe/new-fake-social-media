@@ -1,3 +1,4 @@
+import { Message } from '#models'
 import { useGetConversationMessages } from '../hooks/useMessages'
 import { useParams } from 'react-router-dom'
 
@@ -10,5 +11,12 @@ export default function MessageBox() {
     return <p>Loading...</p>
   }
 
-  return <p>Testing...</p>
+  return (
+    <div>
+      {conversationData.map((message: Message, i: number) => {
+        if (message.IsDeleted) return null
+        return <p key={`Message ${i}`}>{message.Body}</p>
+      })}
+    </div>
+  )
 }
