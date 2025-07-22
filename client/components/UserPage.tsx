@@ -5,6 +5,8 @@ import { useGetPostsFromUser } from '../hooks/usePosts'
 import { Post } from '#models'
 import UserPagePost from './UserPagePost'
 
+import '../styles/userPage.css'
+
 export default function UserPage() {
   const { id } = useParams()
 
