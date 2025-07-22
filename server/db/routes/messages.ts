@@ -19,4 +19,18 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.post('/', async (req, res) => {
+  const message = req.body
+  try {
+    await db.addMessage(message)
+
+    res.status(200)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: `Something went wrong adding message}`,
+    })
+  }
+})
+
 export default router
