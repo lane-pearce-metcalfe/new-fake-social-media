@@ -19,7 +19,7 @@ export default function UserPage() {
   }
 
   return (
-    <>
+    <div className="userPageContainer">
       <h1>{userData.UserName}</h1>
       <img src={userData.PfpUrl} alt={userData.UserName} />
       <p>{userProfileData.Description}</p>
@@ -29,6 +29,6 @@ export default function UserPage() {
           return <UserPagePost post={post} key={`post ${i}`} />
         })}
       </div>
-    </>
+    </div>
   )
 }
