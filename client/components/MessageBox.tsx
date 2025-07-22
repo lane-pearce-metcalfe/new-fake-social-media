@@ -1,10 +1,22 @@
 import { Message } from '#models'
+import { useGetUserById } from '../hooks/useUsers'
 import { useGetConversationMessages } from '../hooks/useMessages'
 import { useParams } from 'react-router-dom'
 
 function MessageBubble({ message }: { message: Message }) {
+  const { data: userData } = useGetUserById(Number(message.SenderId))
+
+  if (!userData) {
+    return null
+  }
+
   if (message.IsDeleted) return null
-  return <p>{message.Body}</p>
+  return (
+    <div>
+      <p>{message.Body}</p>
+      <img src={userData.PfpUrl} alt="" />
+    </div>
+  )
 }
 
 export default function MessageBox() {
