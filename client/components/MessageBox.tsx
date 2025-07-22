@@ -2,6 +2,7 @@ import { Message } from '#models'
 import { useGetUserById } from '../hooks/useUsers'
 import { useGetConversationMessages } from '../hooks/useMessages'
 import { useParams } from 'react-router-dom'
+import '../styles/messageBox.css'
 
 function MessageBubble({ message }: { message: Message }) {
   const { data: userData } = useGetUserById(Number(message.SenderId))
@@ -12,9 +13,9 @@ function MessageBubble({ message }: { message: Message }) {
 
   if (message.IsDeleted) return null
   return (
-    <div>
+    <div className="messageBubble">
+      <img src={userData.PfpUrl} alt="" className="messagePfp" />
       <p>{message.Body}</p>
-      <img src={userData.PfpUrl} alt="" />
     </div>
   )
 }
@@ -29,7 +30,7 @@ export default function MessageBox() {
   }
 
   return (
-    <div>
+    <div className="messageContainer">
       {conversationData.map((message: Message, i: number) => (
         <MessageBubble message={message} key={`Message ${i}`} />
       ))}
