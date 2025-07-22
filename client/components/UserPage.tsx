@@ -23,12 +23,20 @@ export default function UserPage() {
   return (
     <div className="userPageContainer">
       <div className="userInfoContainer">
-        <h1>{userData.UserName}</h1>
-        <img src={userData.PfpUrl} alt={userData.UserName} />
+        <div className="pfpDiv">
+          <img
+            src={userData.PfpUrl}
+            alt={userData.UserName}
+            className="userPfp"
+          />
+          <div className="usernameDiv">
+            <h1>{userData.UserName}</h1>
+            <p>{userProfileData.Location}</p>
+          </div>
+        </div>
         <p>{userProfileData.Description}</p>
-        <p>{userProfileData.Location}</p>
       </div>
-      <div>
+      <div className="usersPosts">
         {userPostData.map((post: Post, i) => {
           return <UserPagePost post={post} key={`post ${i}`} />
         })}

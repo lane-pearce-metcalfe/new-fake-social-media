@@ -1,0 +1,44 @@
+.userPageContainer {
+  width: 75vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+}
+
+.userInfoContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2vh;
+}
+
+.userPfp {
+  width: 10%;
+  border-radius: 100%;
+}
+
+.pfpDiv {
+  display: flex;
+  align-items: center;
+}
+
+.usernameDiv {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.usernameDiv h1 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.usernameDiv p {
+  color: grey;
+}
+
+.usersPosts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
