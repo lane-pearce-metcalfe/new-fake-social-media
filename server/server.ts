@@ -1,18 +1,20 @@
 import express from 'express'
 import * as Path from 'node:path'
 
-import commentRoutes from './db/routes/comments.ts'
-import conversationParticipantRoutes from './db/routes/conversationParticipants.ts'
-import conversationRoutes from './db/routes/conversations.ts'
-import followRoutes from './db/routes/follows.ts'
-import likeRoutes from './db/routes/likes.ts'
-import mentionRoutes from './db/routes/mentions.ts'
-import messageReactionRoutes from './db/routes/messageReactions.ts'
-import messageRoutes from './db/routes/messages.ts'
-import postRoutes from './db/routes/posts.ts'
-import userProfileRoutes from './db/routes/userProfile.ts'
-import userRoutes from './db/routes/users.ts'
-import userSettingRoutes from './db/routes/userSettings.ts'
+import {
+  commentRoutes,
+  conversationParticipantRoutes,
+  conversationRoutes,
+  followRoutes,
+  likeRoutes,
+  mentionRoutes,
+  messageReactionRoutes,
+  messageRoutes,
+  postRoutes,
+  userProfileRoutes,
+  userRoutes,
+  userSettingRoutes,
+} from './db/routes/index.ts'
 
 const server = express()
 
