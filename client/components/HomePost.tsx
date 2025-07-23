@@ -14,8 +14,6 @@ export default function HomePost({ post }: Props) {
     return <p>Loading...</p>
   }
 
-  console.log(post)
-
   return (
     <div className="postContainer">
       <div className="postUserInfo">
