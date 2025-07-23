@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom'
 export default function Header() {
   const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0()
 
-  console.log(user)
-
   function handleLogin() {
     loginWithRedirect({
       appState: { returnTo: '/loadUser' },
