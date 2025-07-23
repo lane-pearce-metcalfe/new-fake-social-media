@@ -1,9 +1,13 @@
 import { Message } from '#models'
 import { useGetUserByAuth0Sub, useGetUserById } from '../hooks/useUsers'
-import { useGetConversationMessages } from '../hooks/useMessages'
+import {
+  useGetConversationMessages,
+  useSendMessage,
+} from '../hooks/useMessages'
 import { useParams } from 'react-router-dom'
 import '../styles/messageBox.css'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useState } from 'react'
 
 function MessageBubble({ message }: { message: Message }) {
   const { data: userData } = useGetUserById(Number(message.SenderId))
@@ -22,6 +26,8 @@ function MessageBubble({ message }: { message: Message }) {
 }
 
 export default function MessageBox() {
+  const [message, setMessage] = useState('')
+
   const { id } = useParams()
 
   const { user } = useAuth0()
@@ -31,6 +37,20 @@ export default function MessageBox() {
   )
 
   const { data: conversationData } = useGetConversationMessages(Number(id))
+
+  const sendMessage = useSendMessage()
+
+  function handleSendMessage() {
+    sendMessage.mutate({
+      SenderId: Number(userData.Id),
+      ConversationId: Number(id),
+      MessageType: 'text',
+      Body: message,
+      CreatedAt: 'test time',
+      EditedAt: null,
+      IsDeleted: false,
+    })
+  }
 
   if (!conversationData || userLoading) {
     return <p>Loading...</p>
@@ -46,6 +66,14 @@ export default function MessageBox() {
           type="text"
           placeholder="Enter message here..."
           className="messageInput"
+          onChange={(e) => {
+            setMessage(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSendMessage()
+            }
+          }}
         />
       )}
     </div>
