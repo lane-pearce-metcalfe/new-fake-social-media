@@ -7,5 +7,5 @@ export async function getMessages(ConversationId: number) {
 }
 
 export async function addMessage(message: AddMessage) {
-  await db('messages').insert({ message })
+  await db('messages').insert(message)
 }
