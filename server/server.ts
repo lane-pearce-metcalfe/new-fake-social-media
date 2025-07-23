@@ -2,7 +2,7 @@ import express from 'express'
 import * as Path from 'node:path'
 
 import commentRoutes from './db/routes/comments.ts'
-import conversationParticipantRoutes from './db/routes/comments.ts'
+import conversationParticipantRoutes from './db/routes/conversationParticipants.ts'
 import conversationRoutes from './db/routes/conversations.ts'
 import followRoutes from './db/routes/follows.ts'
 import likeRoutes from './db/routes/likes.ts'
