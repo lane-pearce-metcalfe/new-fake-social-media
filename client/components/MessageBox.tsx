@@ -1,14 +1,15 @@
 import { Message } from '#models'
-import { useGetUserByAuth0Sub, useGetUserById } from '../hooks/useUsers'
 import {
+  useGetUserByAuth0Sub,
+  useGetUserById,
   useGetConversationMessages,
   useSendMessage,
-} from '../hooks/useMessages'
+  useGetParticipantsByConvoId,
+} from '../hooks'
 import { useParams } from 'react-router-dom'
 import '../styles/messageBox.css'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useMemo, useState } from 'react'
-import { useGetParticipantsByConvoId } from '../hooks/useConversationParticipants'
 
 function MessageBubble({
   message,

@@ -1,5 +1,5 @@
 import { Post } from '#models'
-import { useGetAllPosts } from '../hooks/usePosts'
+import { useGetAllPosts } from '../hooks'
 import HomePost from './HomePost'
 import '../styles/homeFeed.css'
 

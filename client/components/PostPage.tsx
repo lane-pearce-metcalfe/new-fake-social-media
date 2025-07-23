@@ -1,7 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useGetPostById } from '../hooks/usePosts'
-import { useGetUserById } from '../hooks/useUsers'
-import { useGetCommentsOnPost } from '../hooks/useComments'
+import { useGetPostById, useGetCommentsOnPost, useGetUserById } from '../hooks'
 import { Comment } from '#models'
 
 export default function PostPage() {
