@@ -1,8 +1,9 @@
 import { Message } from '#models'
-import { useGetUserById } from '../hooks/useUsers'
+import { useGetUserByAuth0Sub, useGetUserById } from '../hooks/useUsers'
 import { useGetConversationMessages } from '../hooks/useMessages'
 import { useParams } from 'react-router-dom'
 import '../styles/messageBox.css'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function MessageBubble({ message }: { message: Message }) {
   const { data: userData } = useGetUserById(Number(message.SenderId))
@@ -22,6 +23,10 @@ function MessageBubble({ message }: { message: Message }) {
 
 export default function MessageBox() {
   const { id } = useParams()
+
+  const { user } = useAuth0()
+
+  const { data: userData } = useGetUserByAuth0Sub(user?.sub)
 
   const { data: conversationData } = useGetConversationMessages(Number(id))
 
