@@ -17,8 +17,6 @@
     "paths": {
       "#models": ["models/index.ts"],
       "#models/*": ["models/*"],
-      "#hooks": ["hooks/index.ts"],
-      "#hooks/*": ["hooks/*"],
     }
   }
 }
