@@ -26,11 +26,13 @@ export default function MessageBox() {
 
   const { user } = useAuth0()
 
-  const { data: userData } = useGetUserByAuth0Sub(user?.sub)
+  const { data: userData, isLoading: userLoading } = useGetUserByAuth0Sub(
+    user?.sub,
+  )
 
   const { data: conversationData } = useGetConversationMessages(Number(id))
 
-  if (!conversationData) {
+  if (!conversationData || userLoading) {
     return <p>Loading...</p>
   }
 
@@ -39,11 +41,13 @@ export default function MessageBox() {
       {conversationData.map((message: Message, i: number) => (
         <MessageBubble message={message} key={`Message ${i}`} />
       ))}
-      <input
-        type="text"
-        placeholder="Enter message here..."
-        className="messageInput"
-      />
+      {!userData ? null : (
+        <input
+          type="text"
+          placeholder="Enter message here..."
+          className="messageInput"
+        />
+      )}
     </div>
   )
 }
