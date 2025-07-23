@@ -34,6 +34,11 @@ export default function MessageBox() {
       {conversationData.map((message: Message, i: number) => (
         <MessageBubble message={message} key={`Message ${i}`} />
       ))}
+      <input
+        type="text"
+        placeholder="Enter message here..."
+        className="messageInput"
+      />
     </div>
   )
 }

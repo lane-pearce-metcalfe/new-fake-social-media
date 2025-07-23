@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: end;
   padding: 20px;
+  padding-bottom: 75px;
 }
 
 .messageBubble {
