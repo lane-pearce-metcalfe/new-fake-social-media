@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useGetUserById } from '../hooks/useUsers'
+import { useGetUserById } from '../hooks'
 import { Post } from '#models'
 import '../styles/homePost.css'
 

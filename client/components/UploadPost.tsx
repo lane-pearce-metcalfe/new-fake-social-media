@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Upload, X } from 'lucide-react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { useGetUserByAuth0Sub } from '../hooks/useUsers'
-import { useAddPost } from '../hooks/usePosts'
+import { useGetUserByAuth0Sub, useAddPost } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 
 export default function ImageUploadComponent() {

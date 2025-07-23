@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { useAddUser, useGetUserByAuth0Sub } from '../hooks/useUsers'
+import { useAddUser, useGetUserByAuth0Sub } from '../hooks'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

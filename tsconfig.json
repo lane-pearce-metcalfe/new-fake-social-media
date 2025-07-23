@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "#models": ["models/index.ts"],
-      "#models/*": ["models/*"]
+      "#models/*": ["models/*"],
     }
   }
 }

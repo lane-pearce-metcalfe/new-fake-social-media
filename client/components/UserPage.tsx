@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom'
-import { useGetUserById } from '../hooks/useUsers'
-import { useGetUserProfileInfo } from '../hooks/useUserProfile'
-import { useGetPostsFromUser } from '../hooks/usePosts'
+import {
+  useGetUserById,
+  useGetUserProfileInfo,
+  useGetPostsFromUser,
+} from '../hooks'
 import { Post } from '#models'
 import UserPagePost from './UserPagePost'
 

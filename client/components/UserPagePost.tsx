@@ -1,5 +1,5 @@
 import { Post } from '#models'
-import { useGetPostsLikes } from '../hooks/useLikes'
+import { useGetPostsLikes } from '../hooks'
 import '../styles/userPagePosts.css'
 
 export default function UserPagePost({ post }: { post: Post }) {
