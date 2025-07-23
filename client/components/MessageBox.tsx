@@ -55,8 +55,6 @@ export default function MessageBox() {
     Number(id),
   )
 
-  console.log(conversationParticipants)
-
   const { data: conversationData } = useGetConversationMessages(Number(id))
 
   const sendMessage = useSendMessage()
