@@ -9,7 +9,13 @@ import '../styles/messageBox.css'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useState } from 'react'
 
-function MessageBubble({ message }: { message: Message }) {
+function MessageBubble({
+  message,
+  userId,
+}: {
+  message: Message
+  userId: number
+}) {
   const { data: userData } = useGetUserById(Number(message.SenderId))
 
   if (!userData) {
@@ -17,6 +23,16 @@ function MessageBubble({ message }: { message: Message }) {
   }
 
   if (message.IsDeleted) return null
+
+  if (message.SenderId === userId) {
+    return (
+      <div className="messageBubble userMessageBubble">
+        <img src={userData.PfpUrl} alt="" className="messagePfp" />
+        <p>{message.Body}</p>
+      </div>
+    )
+  }
+
   return (
     <div className="messageBubble">
       <img src={userData.PfpUrl} alt="" className="messagePfp" />
@@ -32,9 +48,7 @@ export default function MessageBox() {
 
   const { user } = useAuth0()
 
-  const { data: userData, isLoading: userLoading } = useGetUserByAuth0Sub(
-    user?.sub,
-  )
+  const { data: userData } = useGetUserByAuth0Sub(user?.sub)
 
   const { data: conversationData } = useGetConversationMessages(Number(id))
 
@@ -52,14 +66,18 @@ export default function MessageBox() {
     })
   }
 
-  if (!conversationData || userLoading) {
+  if (!conversationData || !userData) {
     return <p>Loading...</p>
   }
 
   return (
     <div className="messageContainer">
       {conversationData.map((message: Message, i: number) => (
-        <MessageBubble message={message} key={`Message ${i}`} />
+        <MessageBubble
+          message={message}
+          userId={userData.Id}
+          key={`Message ${i}`}
+        />
       ))}
       {!userData ? null : (
         <input

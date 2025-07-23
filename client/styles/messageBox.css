@@ -34,6 +34,15 @@
   margin-top: 10px;
 }
 
+.userMessageBubble {
+  flex-direction: row-reverse;
+}
+
+.userMessageBubble .messagePfp {
+  margin-right: 0px;
+  margin-left: 10px;
+}
+
 .messageInput {
   position: absolute;
   bottom: 20px;
