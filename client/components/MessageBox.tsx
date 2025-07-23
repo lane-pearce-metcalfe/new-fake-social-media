@@ -7,7 +7,7 @@ import {
 import { useParams } from 'react-router-dom'
 import '../styles/messageBox.css'
 import { useAuth0 } from '@auth0/auth0-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useGetParticipantsByConvoId } from '../hooks/useConversationParticipants'
 
 function MessageBubble({
@@ -71,20 +71,19 @@ export default function MessageBox() {
     })
   }
 
-  function checkIfUserInConvo(participants) {
-    participants.forEach(({ UserId }: { UserId: number }) => {
-      if (UserId == userData.Id) {
-        return true
-      }
-    })
-    return false
-  }
+  const isUserInConvo = useMemo(() => {
+    if (!conversationParticipants || !userData) return false
+
+    return conversationParticipants.some(
+      (participant) => participant.UserId == userData.Id,
+    )
+  }, [conversationParticipants, userData])
 
   if (!conversationData || !userData || !conversationParticipants) {
     return <p>Loading...</p>
   }
 
-  if (!checkIfUserInConvo(conversationParticipants)) {
+  if (!isUserInConvo) {
     return <p>You do not belong in this convo</p>
   }
 
