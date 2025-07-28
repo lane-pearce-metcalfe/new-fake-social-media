@@ -1,17 +1,4 @@
 export async function seed(knex) {
-  await knex('userSettings').del()
-  await knex('userProfile').del()
-  await knex('messageReactions').del()
-  await knex('messages').del()
-  await knex('conversationParticipants').del()
-  await knex('conversations').del()
-  await knex('mentions').del()
-  await knex('follows').del()
-  await knex('likes').del()
-  await knex('comments').del()
-  await knex('posts').del()
-  await knex('users').del()
-
   await knex('users').insert([
     {
       Id: 1,
