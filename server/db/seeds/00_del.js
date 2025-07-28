@@ -15,6 +15,11 @@ export async function seed(knex) {
   ]
 
   for (const name of seedNames) {
-    await knex(name).del()
+    const exists = await knex.schema.hasTable(name)
+    if (exists) {
+      await knex(name).del()
+    } else {
+      console.log(`Table ${name} might not exist yet`)
+    }
   }
 }
