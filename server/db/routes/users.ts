@@ -7,9 +7,20 @@ const router = Router()
 
 router.post('/', async (req, res) => {
   const user: AddUser = req.body
-
   try {
     await db.addUser(user)
+
+    if (
+      !user.Auth0Sub ||
+      !user.UserName ||
+      !user.FullName ||
+      !user.Email ||
+      !user.PfpUrl ||
+      !user.UserSince ||
+      !user.Auth0Sub
+    ) {
+      return res.status(400).json(`User missing critical info`)
+    }
 
     res.status(200).json('User added successfully')
   } catch (error) {
