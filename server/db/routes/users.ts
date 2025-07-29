@@ -10,6 +10,7 @@ router.post('/', async (req, res) => {
   try {
     await db.addUser(user)
 
+    //Checking if some data is missing
     if (
       !user.Auth0Sub ||
       !user.UserName ||
@@ -22,7 +23,8 @@ router.post('/', async (req, res) => {
       return res.status(400).json(`User missing critical info`)
     }
 
-    if (!user.Email.includes('@')) {
+    //Checking if theres a proper email format
+    if (!user.Email.includes('@') || user.Email.length < 6) {
       return res.status(400).json(`Invalid email format`)
     }
 
