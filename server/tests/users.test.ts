@@ -64,4 +64,12 @@ describe('Adding a user', () => {
 
     expect(res.status).toBe(400)
   })
+
+  it('should accept minimum valid email length', async () => {
+    const res = await request(server)
+      .post(`/api/v1/users`)
+      .send({ ...userData, Email: '21@g.co' })
+
+    expect(res.status).toBe(200)
+  })
 })
