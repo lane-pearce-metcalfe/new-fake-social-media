@@ -22,6 +22,10 @@ router.post('/', async (req, res) => {
       return res.status(400).json(`User missing critical info`)
     }
 
+    if (!user.Email.includes('@')) {
+      return res.status(400).json(`Invalid email format`)
+    }
+
     res.status(200).json('User added successfully')
   } catch (error) {
     console.log(error)
