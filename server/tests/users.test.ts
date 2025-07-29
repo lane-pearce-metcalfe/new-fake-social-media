@@ -45,8 +45,6 @@ describe('Adding a user', () => {
 
     const res = await request(server).post(`/api/v1/users`).send(userData)
 
-    console.log(res.status)
-
     expect(res.status).toBe(400)
   })
 
@@ -61,8 +59,6 @@ describe('Adding a user', () => {
     }
 
     const res = await request(server).post(`/api/v1/users`).send(userData)
-
-    console.log(res.status)
 
     expect(res.status).toBe(400)
   })
