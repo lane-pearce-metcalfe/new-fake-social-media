@@ -7,11 +7,28 @@ const router = Router()
 
 router.post('/', async (req, res) => {
   const user: AddUser = req.body
-
   try {
     await db.addUser(user)
 
-    res.status(200)
+    //Checking if some data is missing
+    if (
+      !user.Auth0Sub ||
+      !user.UserName ||
+      !user.FullName ||
+      !user.Email ||
+      !user.PfpUrl ||
+      !user.UserSince ||
+      !user.Auth0Sub
+    ) {
+      return res.status(400).json(`User missing critical info`)
+    }
+
+    //Checking if theres a proper email format
+    if (!user.Email.includes('@') || user.Email.length < 6) {
+      return res.status(400).json(`Invalid email format`)
+    }
+
+    res.status(200).json('User added successfully')
   } catch (error) {
     console.log(error)
     res.status(500).json({
