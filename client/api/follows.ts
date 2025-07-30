@@ -11,3 +11,10 @@ export async function getUsersFollowers(userId: number) {
   const result = await request.get(`${rootUrl}/followers/${userId}`)
   return result.body
 }
+
+export async function getRelationship(userId: number, followedUserId: number) {
+  const result = await request.get(
+    `${rootUrl}/relationship/${userId}/${followedUserId}`,
+  )
+  return result.body
+}
