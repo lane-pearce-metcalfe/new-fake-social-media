@@ -34,3 +34,7 @@ export async function getRelationship(
     return 'none'
   }
 }
+
+export async function followUser(UserId: number, FollowedUserId: number) {
+  await db('follows').insert({ UserId, FollowedUserId })
+}
