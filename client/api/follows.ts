@@ -18,3 +18,7 @@ export async function getRelationship(userId: number, followedUserId: number) {
   )
   return result.body
 }
+
+export async function followUser(userId: number, followedUserId: number) {
+  await request.post(`${rootUrl}/follow/${userId}/${followedUserId}`)
+}
