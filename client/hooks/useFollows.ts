@@ -1,8 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   getUsersFollowers,
   getUsersFollows,
   getRelationship,
+  followUser,
 } from '../api/follows'
 
 export function useGetUsersFollows(userId: number) {
@@ -27,4 +28,22 @@ export function useGetRelationships(userId: number, followedUserId: number) {
     queryFn: () => getRelationship(userId, followedUserId),
   })
   return query
+}
+
+export function useFollowUser(userId: number, followedUserId: number) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: () => followUser(userId, followedUserId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['follows for user: ', userId],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['followers for user ', followedUserId],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['relationship for user', userId, followedUserId],
+      })
+    },
+  })
 }
