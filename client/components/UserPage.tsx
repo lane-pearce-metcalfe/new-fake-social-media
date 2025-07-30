@@ -3,6 +3,7 @@ import {
   useGetUserById,
   useGetUserProfileInfo,
   useGetPostsFromUser,
+  useFollowUser,
 } from '../hooks'
 import { Post } from '#models'
 import UserPagePost from './UserPagePost'
@@ -17,6 +18,21 @@ export default function UserPage() {
   const { data: userProfileData } = useGetUserProfileInfo(Number(id))
 
   const { data: userPostData } = useGetPostsFromUser(Number(id))
+
+  const follow = useFollowUser()
+  const unfollow = useFollowUser()
+
+  const handleFollow = () => {
+    if (userData && userData.id) {
+      follow.mutate({ userId: userData.id, followedUserId: Number(id) })
+    }
+  }
+
+  const handleUnfollow = () => {
+    if (userData && userData.id) {
+      unfollow.mutate({ userId: userData.id, followedUserId: Number(id) })
+    }
+  }
 
   if (!userData || !userProfileData || !userPostData) {
     return <p>Loading...</p>
