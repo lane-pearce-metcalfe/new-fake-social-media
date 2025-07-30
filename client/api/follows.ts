@@ -22,3 +22,7 @@ export async function getRelationship(userId: number, followedUserId: number) {
 export async function followUser(userId: number, followedUserId: number) {
   await request.post(`${rootUrl}/follow/${userId}/${followedUserId}`)
 }
+
+export async function unfollowUser(userId: number, followedUserId: number) {
+  await request.delete(`${rootUrl}/unfollow/${userId}/${followedUserId}`)
+}
