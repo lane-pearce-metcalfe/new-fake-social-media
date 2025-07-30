@@ -4,6 +4,7 @@ import {
   useGetUserProfileInfo,
   useGetPostsFromUser,
   useFollowUser,
+  useGetRelationships,
 } from '../hooks'
 import { Post } from '#models'
 import UserPagePost from './UserPagePost'
@@ -34,7 +35,12 @@ export default function UserPage() {
     }
   }
 
-  if (!userData || !userProfileData || !userPostData) {
+  const { data: relationshipData } = useGetRelationships(
+    userData?.id,
+    Number(id),
+  )
+
+  if (!userData || !userProfileData || !userPostData || !relationshipData) {
     return <p>Loading...</p>
   }
 
