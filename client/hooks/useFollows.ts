@@ -4,6 +4,7 @@ import {
   getUsersFollows,
   getRelationship,
   followUser,
+  unfollowUser,
 } from '../api/follows'
 
 export function useGetUsersFollows(userId: number) {
@@ -34,6 +35,24 @@ export function useFollowUser(userId: number, followedUserId: number) {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: () => followUser(userId, followedUserId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['follows for user: ', userId],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['followers for user ', followedUserId],
+      })
+      queryClient.invalidateQueries({
+        queryKey: ['relationship for user', userId, followedUserId],
+      })
+    },
+  })
+}
+
+export function useUnfollowUser(userId: number, followedUserId: number) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: () => unfollowUser(userId, followedUserId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['follows for user: ', userId],
