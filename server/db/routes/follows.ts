@@ -34,4 +34,20 @@ router.get('/followers/:id', async (req, res) => {
   }
 })
 
+router.get('/relationship/:userId/:followedUserId', async (req, res) => {
+  const UserId = Number(req.params.userId)
+  const FollowedUserId = Number(req.params.followedUserId)
+
+  try {
+    const relationship = await db.getRelationship(UserId, FollowedUserId)
+
+    res.status(200).json(relationship)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: `Something went wrong checking the relationship between user ${UserId} and user ${FollowedUserId}`,
+    })
+  }
+})
+
 export default router
