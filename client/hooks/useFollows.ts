@@ -31,37 +31,57 @@ export function useGetRelationships(userId: number, followedUserId: number) {
   return query
 }
 
-export function useFollowUser(userId: number, followedUserId: number) {
+export function useFollowUser() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: () => followUser(userId, followedUserId),
-    onSuccess: () => {
+    mutationFn: ({
+      userId,
+      followedUserId,
+    }: {
+      userId: number
+      followedUserId: number
+    }) => followUser(userId, followedUserId),
+    onSuccess: (data, params) => {
       queryClient.invalidateQueries({
-        queryKey: ['follows for user: ', userId],
+        queryKey: ['follows for user: ', params.userId],
       })
       queryClient.invalidateQueries({
-        queryKey: ['followers for user ', followedUserId],
+        queryKey: ['followers for user ', params.followedUserId],
       })
       queryClient.invalidateQueries({
-        queryKey: ['relationship for user', userId, followedUserId],
+        queryKey: [
+          'relationship for user',
+          params.userId,
+          params.followedUserId,
+        ],
       })
     },
   })
 }
 
-export function useUnfollowUser(userId: number, followedUserId: number) {
+export function useUnfollowUser() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: () => unfollowUser(userId, followedUserId),
-    onSuccess: () => {
+    mutationFn: ({
+      userId,
+      followedUserId,
+    }: {
+      userId: number
+      followedUserId: number
+    }) => unfollowUser(userId, followedUserId),
+    onSuccess: (data, params) => {
       queryClient.invalidateQueries({
-        queryKey: ['follows for user: ', userId],
+        queryKey: ['follows for user: ', params.userId],
       })
       queryClient.invalidateQueries({
-        queryKey: ['followers for user ', followedUserId],
+        queryKey: ['followers for user ', params.followedUserId],
       })
       queryClient.invalidateQueries({
-        queryKey: ['relationship for user', userId, followedUserId],
+        queryKey: [
+          'relationship for user',
+          params.userId,
+          params.followedUserId,
+        ],
       })
     },
   })
