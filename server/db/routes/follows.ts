@@ -65,4 +65,19 @@ router.post('/follow/:userId/:followedUserId', async (req, res) => {
   }
 })
 
+router.delete('/unfollow/:userId/:followedUserId', async (req, res) => {
+  const UserId = Number(req.params.userId)
+  const FollowedUserId = Number(req.params.followedUserId)
+
+  try {
+    await db.unfollowUser(UserId, FollowedUserId)
+    res.status(200)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: `Something went wrong unfollowing user ${FollowedUserId} from user ${UserId}`,
+    })
+  }
+})
+
 export default router
