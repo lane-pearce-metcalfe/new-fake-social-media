@@ -1,24 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
-  getUsersFollowers,
-  getUsersFollows,
+  getUsersFollowCounts,
   getRelationship,
   followUser,
   unfollowUser,
 } from '../api/follows'
 
-export function useGetUsersFollows(userId: number) {
+export function useGetUserFollowCounts(userId: number) {
   const query = useQuery({
-    queryKey: ['follows for user:', userId],
-    queryFn: () => getUsersFollows(userId),
-  })
-  return query
-}
-
-export function useGetUsersFollowers(userId: number) {
-  const query = useQuery({
-    queryKey: ['followers for user:', userId],
-    queryFn: () => getUsersFollowers(userId),
+    queryKey: ['follow counts for user:', userId],
+    queryFn: () => getUsersFollowCounts(userId),
+    enabled: userId !== undefined,
   })
   return query
 }
