@@ -24,11 +24,11 @@ export async function getRelationship(
     .where({ UserId: FollowedUserId, FollowedUserId: UserId })
     .first()
 
-  if (following && followed) {
+  if (following !== undefined && followed !== undefined) {
     return 'mutual'
-  } else if (following) {
+  } else if (following !== undefined && followed === undefined) {
     return 'following'
-  } else if (followed) {
+  } else if (followed !== undefined && following === undefined) {
     return 'followed'
   } else {
     return 'none'
