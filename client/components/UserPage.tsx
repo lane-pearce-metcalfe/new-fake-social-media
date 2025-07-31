@@ -7,6 +7,7 @@ import {
   useUnfollowUser,
   useGetRelationships,
   useGetUserByAuth0Sub,
+  useGetUserFollowCounts,
 } from '../hooks'
 import { Post } from '#models'
 import UserPagePost from './UserPagePost'
@@ -22,6 +23,8 @@ export default function UserPage() {
   const { data: userProfileData } = useGetUserProfileInfo(Number(id))
 
   const { data: userPostData } = useGetPostsFromUser(Number(id))
+
+  const { data: followCounts } = useGetUserFollowCounts(Number(id))
 
   const { user } = useAuth0()
 
@@ -50,7 +53,15 @@ export default function UserPage() {
     Number(id),
   )
 
-  if (!userData || !userProfileData || !userPostData || !relationshipData) {
+  console.log(followCounts)
+
+  if (
+    !userData ||
+    !userProfileData ||
+    !userPostData ||
+    !relationshipData ||
+    !followCounts
+  ) {
     return <p>Loading...</p>
   }
 
@@ -75,6 +86,8 @@ export default function UserPage() {
               ) : (
                 <button onClick={() => handleUnfollow()}>Unfriend</button>
               )}
+              <h1>Following: {`${followCounts.follows}`}</h1>
+              <h1>Followers: {`${followCounts.followers}`}</h1>
             </div>
             <p>{userProfileData.Location}</p>
           </div>
