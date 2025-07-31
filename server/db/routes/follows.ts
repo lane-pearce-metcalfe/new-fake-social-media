@@ -56,7 +56,7 @@ router.post('/follow/:userId/:followedUserId', async (req, res) => {
 
   try {
     await db.followUser(UserId, FollowedUserId)
-    res.status(200)
+    res.status(200).json({ success: true })
   } catch (error) {
     console.log(error)
     res.status(500).json({
@@ -71,7 +71,7 @@ router.delete('/unfollow/:userId/:followedUserId', async (req, res) => {
 
   try {
     await db.unfollowUser(UserId, FollowedUserId)
-    res.status(200)
+    res.status(200).json({ success: true })
   } catch (error) {
     console.log(error)
     res.status(500).json({
