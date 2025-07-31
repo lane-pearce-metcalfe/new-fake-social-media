@@ -9,7 +9,7 @@ import {
 
 export function useGetUsersFollows(userId: number) {
   const query = useQuery({
-    queryKey: ['follows for user:  ', userId],
+    queryKey: ['follows for user:', userId],
     queryFn: () => getUsersFollows(userId),
   })
   return query
@@ -17,7 +17,7 @@ export function useGetUsersFollows(userId: number) {
 
 export function useGetUsersFollowers(userId: number) {
   const query = useQuery({
-    queryKey: ['followers for user ', userId],
+    queryKey: ['followers for user:', userId],
     queryFn: () => getUsersFollowers(userId),
   })
   return query
@@ -25,8 +25,9 @@ export function useGetUsersFollowers(userId: number) {
 
 export function useGetRelationships(userId: number, followedUserId: number) {
   const query = useQuery({
-    queryKey: ['relationship for user', userId, followedUserId],
+    queryKey: ['relationship for user:', userId, followedUserId],
     queryFn: () => getRelationship(userId, followedUserId),
+    enabled: userId !== undefined && followedUserId !== undefined,
   })
   return query
 }
@@ -43,14 +44,8 @@ export function useFollowUser() {
     }) => followUser(userId, followedUserId),
     onSuccess: (data, params) => {
       queryClient.invalidateQueries({
-        queryKey: ['follows for user: ', params.userId],
-      })
-      queryClient.invalidateQueries({
-        queryKey: ['followers for user ', params.followedUserId],
-      })
-      queryClient.invalidateQueries({
         queryKey: [
-          'relationship for user',
+          'relationship for user:',
           params.userId,
           params.followedUserId,
         ],
@@ -71,14 +66,8 @@ export function useUnfollowUser() {
     }) => unfollowUser(userId, followedUserId),
     onSuccess: (data, params) => {
       queryClient.invalidateQueries({
-        queryKey: ['follows for user: ', params.userId],
-      })
-      queryClient.invalidateQueries({
-        queryKey: ['followers for user ', params.followedUserId],
-      })
-      queryClient.invalidateQueries({
         queryKey: [
-          'relationship for user',
+          'relationship for user:',
           params.userId,
           params.followedUserId,
         ],
