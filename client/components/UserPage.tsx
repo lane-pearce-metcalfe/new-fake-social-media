@@ -4,12 +4,15 @@ import {
   useGetUserProfileInfo,
   useGetPostsFromUser,
   useFollowUser,
+  useUnfollowUser,
   useGetRelationships,
+  useGetUserByAuth0Sub,
 } from '../hooks'
 import { Post } from '#models'
 import UserPagePost from './UserPagePost'
 
 import '../styles/userPage.css'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function UserPage() {
   const { id } = useParams()
@@ -20,23 +23,30 @@ export default function UserPage() {
 
   const { data: userPostData } = useGetPostsFromUser(Number(id))
 
+  const { user } = useAuth0()
+
+  const { data: userDataFromAuth } = useGetUserByAuth0Sub(user?.sub)
+
   const follow = useFollowUser()
-  const unfollow = useFollowUser()
+  const unfollow = useUnfollowUser()
 
   const handleFollow = () => {
-    if (userData && userData.id) {
-      follow.mutate({ userId: userData.id, followedUserId: Number(id) })
+    if (userData && userData.Id) {
+      follow.mutate({ userId: userDataFromAuth.Id, followedUserId: Number(id) })
     }
   }
 
   const handleUnfollow = () => {
-    if (userData && userData.id) {
-      unfollow.mutate({ userId: userData.id, followedUserId: Number(id) })
+    if (userData && userData.Id) {
+      unfollow.mutate({
+        userId: userDataFromAuth.Id,
+        followedUserId: Number(id),
+      })
     }
   }
 
   const { data: relationshipData } = useGetRelationships(
-    userData?.id,
+    userDataFromAuth?.Id,
     Number(id),
   )
 
@@ -54,7 +64,18 @@ export default function UserPage() {
             className="userPfp"
           />
           <div className="usernameDiv">
-            <h1>{userData.UserName}</h1>
+            <div className="followButtonDiv">
+              <h1>{userData.UserName}</h1>
+              {relationshipData === 'none' ? (
+                <button onClick={() => handleFollow()}>Follow</button>
+              ) : relationshipData === 'following' ? (
+                <button onClick={() => handleUnfollow()}>Following</button>
+              ) : relationshipData === 'followed' ? (
+                <button onClick={() => handleFollow()}>Follow Back</button>
+              ) : (
+                <button onClick={() => handleUnfollow()}>Unfriend</button>
+              )}
+            </div>
             <p>{userProfileData.Location}</p>
           </div>
         </div>

@@ -32,6 +32,12 @@
   font-size: 2rem;
 }
 
+.followButtonDiv {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .usernameDiv p {
   color: grey;
 }
