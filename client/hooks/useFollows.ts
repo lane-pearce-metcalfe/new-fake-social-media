@@ -42,6 +42,9 @@ export function useFollowUser() {
           params.followedUserId,
         ],
       })
+      queryClient.invalidateQueries({
+        queryKey: ['follow counts for user:', params.followedUserId],
+      })
     },
   })
 }
