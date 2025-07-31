@@ -2,12 +2,12 @@ import db from '../connection.ts'
 
 export async function getUsersFollowing(UserId: number) {
   const following = await db('follows').where({ UserId }).select()
-  return following
+  return following.length
 }
 
 export async function getUsersFollowers(FollowedUserId: number) {
   const followers = await db('follows').where({ FollowedUserId }).select()
-  return followers
+  return followers.length
 }
 
 type Relationship = 'none' | 'following' | 'followed' | 'mutual'
